@@ -8,11 +8,12 @@ app.use(express.json({ extend: true }));
 
 const PORT = process.env.PORT || 4000;
 
-app.use('/api/users', require('./routes/Users'))
-app.use('/api/auth', require('./routes/Auth'))
+app.use('/api/users', require('./routes/Users'));
+app.use('/api/auth', require('./routes/Auth'));
+app.use('/api/projects', require('./routes/Projects'));
 
 app.get('/', (req, res) => {
-    res.send('Server OK')
+    res.send('Server OK');
 })
 
 app.listen(PORT, () => {
