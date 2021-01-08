@@ -1,8 +1,10 @@
 const express = require('express');
-const dbConnect = require('./config/db')
+const dbConnect = require('./config/db');
+const cors = require('cors');
 
 const app = express();
 dbConnect();
+app.use(cors());
 
 app.use(express.json({ extend: true }));
 
@@ -14,9 +16,9 @@ app.use('/api/projects', require('./routes/Projects'));
 app.use('/api/tasks', require('./routes/Tasks'));
 
 app.get('/', (req, res) => {
-    res.send('Server OK');
-})
+  res.send('Server OK');
+});
 
 app.listen(PORT, () => {
-    console.log(`servidor en puerto ${PORT}`);
-})
+  console.log(`servidor en puerto ${PORT}`);
+});
