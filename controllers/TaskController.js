@@ -41,7 +41,7 @@ exports.createTask = async (req, res) => {
 
 exports.getTasksByProject = async (req, res) => {
 
-    const { project } = req.body;
+    const { project } = req.query;
     try {
 
         const checkProject = await Project.findById(project);
@@ -68,13 +68,8 @@ exports.updateTask = async (req, res) => {
     const { name, state, project } = req.body;
     const newTask = {};
 
-    if (name) {
-        newTask.name = name;
-    }
-
-    if (state) {
-        newTask.state = state;
-    }
+    newTask.name = name;
+    newTask.state = state;
 
     try {
 
@@ -102,7 +97,7 @@ exports.updateTask = async (req, res) => {
 
 exports.deleteTask = async (req, res) => {
 
-    const { project } = req.body;
+    const { project } = req.query;
 
     try {
         let task = await Task.findById(req.params.id);
@@ -118,7 +113,7 @@ exports.deleteTask = async (req, res) => {
         task = await Task.findOneAndRemove({ _id: req.params.id });
         res.json({ msg: "project deleted" });
 
-        res.json({ task });
+        //res.json({ task });
 
     } catch (err) {
         console.error(err);
