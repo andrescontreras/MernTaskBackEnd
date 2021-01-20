@@ -15,13 +15,13 @@ exports.authenticateUser = async (req, res) => {
     let user = await User.findOne({ email });
     if (!user) {
       console.error('Incorrect email', email);
-      return res.status(400).json({ msg: 'Login error' });
+      return res.status(400).json({ msg: 'Invalid credentials' });
     }
 
     const passValidation = await bcryptjs.compare(password, user.password);
     if (!passValidation) {
       console.error('Incorrect password', password);
-      return res.status(400).json({ msg: 'Login error' });
+      return res.status(400).json({ msg: 'Invalid credentials' });
     }
 
     const payload = {
